@@ -1,0 +1,49 @@
+
+.movieContainer {
+    display: flex;
+    max-width: 500px;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow */
+}
+
+.movieImage {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.movieTitle {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.movieOverview {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.movieReleaseDate,
+.moviePopularity,
+.movieVoteAverage {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.movieReleaseDate {
+    color: blue;
+}
+
+.moviePopularity {
+    color: green;
+}
+
+.movieVoteAverage {
+    color: red;
+}
