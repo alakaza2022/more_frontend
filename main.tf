@@ -22,13 +22,13 @@ variable "image_name" {}
 provider "azurerm" {
   features {}
 }
-resource "azurerm_resource_group" "example" {
-  name     = "example-resource-group"
+resource "azurerm_resource_group" "more_resource_group" {
+  name     = "rg-more-webapp-we"
   location = "West Europe"
 }
 
-resource "azurerm_app_service_plan" "example" {
-  name                = "more-and-more-app-service-plan"
+resource "azurerm_app_service_plan" "more_service_plan" {
+  name                = "plan-more-webapp-we"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   kind                = "Linux"
@@ -42,8 +42,8 @@ resource "azurerm_app_service_plan" "example" {
 
 }
 
-resource "azurerm_app_service" "example" {
-  name                = "more-and-more-app-service"
+resource "azurerm_app_service" "more_app_service" {
+  name                = "app-more-webapp-fronent-we"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   app_service_plan_id = azurerm_app_service_plan.example.id
