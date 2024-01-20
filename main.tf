@@ -29,8 +29,8 @@ resource "azurerm_resource_group" "more_resource_group" {
 
 resource "azurerm_app_service_plan" "more_service_plan" {
   name                = "plan-more-webapp-we"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.more_resource_group.location
+  resource_group_name = azurerm_resource_group.more_resource_group.name
   kind                = "Linux"
   reserved            = true
 
@@ -44,9 +44,9 @@ resource "azurerm_app_service_plan" "more_service_plan" {
 
 resource "azurerm_app_service" "more_app_service_front" {
   name                = "app-more-webapp-fronent-we"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
-  app_service_plan_id = azurerm_app_service_plan.example.id
+  location            = azurerm_resource_group.more_resource_group.location
+  resource_group_name = azurerm_resource_group.more_resource_group.name
+  app_service_plan_id = azurerm_app_service_plan.more_service_plan.id
 
   site_config {
     always_on        = true
