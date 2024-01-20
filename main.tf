@@ -12,7 +12,7 @@ terraform {
     storage_account_name = "popoutboprodweublob"
     container_name       = "terraform"
     resource_group_name = "rg-popout-back-office-we"
-    key                  = "terraform.tfstate"
+    key                  = "frontend.tfstate"
   }
 }
 
@@ -58,5 +58,6 @@ resource "azurerm_app_service" "more_app_service_front" {
     DOCKER_REGISTRY_SERVER_URL                 = "https://crwebappprodwe.azurecr.io"
     DOCKER_REGISTRY_SERVER_USERNAME            = "crwebappprodwe"
     WEBSITES_PORT                               = "3000"
+    HOST                                        = ""
   }
 }
