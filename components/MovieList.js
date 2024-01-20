@@ -12,7 +12,7 @@ const MovieList = ({ movies }) => {
     if (sortOption === 'release_date') {
       const dateA = new Date(a.release_date);
       const dateB = new Date(b.release_date);
-      return dateA - dateB;
+      return dateB - dateA;
     } else {
       return -a[sortOption] + b[sortOption];
     }

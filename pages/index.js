@@ -2,6 +2,7 @@
 
 import Head from 'next/head';
 import MovieList from '../components/MovieList';
+import fs from 'fs';
 
 const Home = ({ moviesData }) => {
   return (
@@ -14,6 +15,11 @@ const Home = ({ moviesData }) => {
       </Head>
 
       <main>
+        <h1 style={{ textAlign: 'center', color: '#0359AE', fontFamily: 'Arial' }}>
+          More Movies
+        </h1>
+        <h2 style={{ textAlign: 'center', color: '#14B09B', fontFamily: 'Arial' }}>
+          Find this week's treding movies </h2>
         <MovieList movies={moviesData} />
       </main>
     </>
@@ -21,8 +27,16 @@ const Home = ({ moviesData }) => {
 };
 
 export async function getServerSideProps() {
-  const res = await fetch('http://localhost:3000/movies');
-  const moviesData = await res.json();
+  const testing = process.env.TESTING; 
+  let moviesData;
+
+  if (testing) {
+    const staticData = fs.readFileSync('../test_files/static_movie_data.json', 'utf-8');
+    moviesData = JSON.parse(staticData);
+  } else {
+    const res = await fetch(`http://${process.env.HOST}/movies`);
+    moviesData = await res.json();
+  }
 
   return {
     props: {
