@@ -12,7 +12,7 @@ terraform {
     storage_account_name = "popoutboprodweublob"
     container_name       = "terraform"
     resource_group_name = "rg-popout-back-office-we"
-    key                  = "terraform.tfstate"
+    key                  = "fronent.tfstate"
   }
 }
 
@@ -22,13 +22,13 @@ variable "image_name" {}
 provider "azurerm" {
   features {}
 }
-resource "azurerm_resource_group" "more_resource_group" {
-  name     = "rg-more-webapp-we"
+resource "azurerm_resource_group" "more_frontend_resource_group" {
+  name     = "rg-more-webapp-frontend-we"
   location = "West Europe"
 }
 
-resource "azurerm_app_service_plan" "more_service_plan" {
-  name                = "plan-more-webapp-we"
+resource "azurerm_app_service_plan" "more_frontend_service_plan" {
+  name                = "plan-more-webapp-frontend-we"
   location            = azurerm_resource_group.more_resource_group.location
   resource_group_name = azurerm_resource_group.more_resource_group.name
   kind                = "Linux"
@@ -40,11 +40,6 @@ resource "azurerm_app_service_plan" "more_service_plan" {
   }
 
 
-}
-
-data "azurerm_app_service" "backend" {
-  name                = "more_app_service_back"
-  resource_group_name = azurerm_resource_group.more_resource_group.name
 }
 
 resource "azurerm_app_service" "more_app_service_front" {
