@@ -31,7 +31,7 @@ export async function getServerSideProps() {
   let moviesData;
 
   if (testing) {
-    const staticData = fs.readFileSync('../test_files/static_movie_data.json', 'utf-8');
+    const staticData = fs.readFileSync(process.cwd()+ '/test_files/static_movie_data.json', 'utf-8');
     moviesData = JSON.parse(staticData);
   } else {
     const res = await fetch(`${process.env.HOST}/movies`);
