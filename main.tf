@@ -12,7 +12,7 @@ terraform {
     storage_account_name = "popoutboprodweublob"
     container_name       = "terraform"
     resource_group_name = "rg-popout-back-office-we"
-    key                  = "frontend.tfstate"
+    key                  = "terraform.tfstate"
   }
 }
 
@@ -40,6 +40,11 @@ resource "azurerm_app_service_plan" "more_service_plan" {
   }
 
 
+}
+
+data "azurerm_app_service" "backend" {
+  name                = "more_app_service_back"
+  resource_group_name = azurerm_resource_group.more_resource_group.name
 }
 
 resource "azurerm_app_service" "more_app_service_front" {
