@@ -16,11 +16,39 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Build and Test Docker Image
+        run: |
+            # Build Docker image
+            docker build -t crwebappprodwe.azurecr.io/more_frontend:latest .
+
+            # Run Docker container, map to port 3000, and perform tests
+            docker run -d -p 3000:3000 --name test-container crwebappprodwe.azurecr.io/more_frontend:latest
+            sleep 5 # Wait for container to start
+
+            # Perform tests (replace with your actual test command)
+            http_status=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000)
+            html_content=$(curl -s http://localhost:3000)
+
+            # Check if HTTP status is 200 and HTML content contains specific tags using regex
+            if [ "$http_status" -eq 200 ]; then
+              echo "Tests passed!"
+            else
+              echo "Tests failed. Exiting..."
+              docker stop test-container
+              docker rm test-container
+              exit 1
+            fi
+
+            # Stop and remove the test container
+            docker stop test-container
+            docker rm test-container
+
       - name: Build Docker Image 
         run: |
           docker build -t crwebappprodwe.azurecr.io/more_frontend:latest .
           echo ${{ secrets.ACR_PASSWORD }} | docker login crwebappprodwe.azurecr.io -u ${{ secrets.ACR_USERNAME }} --password-stdin
           docker push crwebappprodwe.azurecr.io/more_frontend:latest
+  
 
   deploy:
     permissions:
