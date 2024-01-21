@@ -23,6 +23,8 @@ jobs:
           docker push crwebappprodwe.azurecr.io/more_frontend:latest
 
   deploy:
+    permissions:
+      issues: write
     runs-on: ubuntu-latest
     needs: build-and-test
 
@@ -55,15 +57,9 @@ jobs:
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
           IMAGE_NAME: "crwebappprodwe.azurecr.io/more_frontend:latest"
 
-      - name: Manual Approval
-        if: github.event_name == 'workflow_run'
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "Manual approval"
-
       - uses: trstringer/manual-approval@v1
         with:
-          secret: ${{ github.TOKEN }}
+          secret: ${{ secrets.GITHUB_TOKEN }}
           approvers: alakaza2022
           minimum-approvals: 1
           issue-title: "More Frontend Deployment Approval"
