@@ -58,6 +58,6 @@ resource "azurerm_app_service" "more_app_service_front" {
     DOCKER_REGISTRY_SERVER_URL                 = "https://crwebappprodwe.azurecr.io"
     DOCKER_REGISTRY_SERVER_USERNAME            = "crwebappprodwe"
     WEBSITES_PORT                               = "3000"
-    HOST                                        = ""
+    HOST                                        = "https://app-more-webapp-backend-we.azurewebsites.net"
   }
 }
