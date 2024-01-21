@@ -61,6 +61,16 @@ jobs:
         with:
           commit_message: "Manual approval"
 
+      - uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: alakaza2022
+          minimum-approvals: 1
+          issue-title: "More Frontend Deployment Approval"
+          exclude-workflow-initiator-as-approver: false
+          additional-approved-words: ''
+          additional-denied-words: ''
+
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
         env:
